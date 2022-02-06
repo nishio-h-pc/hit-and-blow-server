@@ -16,7 +16,7 @@
 			$stmt->bindParam(1,$id,PDO::PARAM_INT);
 			$stmt->execute();
 			$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
-			echo $res['duplicate'].$res['name0'];
+			echo strlen($res['duplicate']).$res['name0'];
 			break;
 		case 'waitStart':
 			$id=hexdec($_POST['id']);
