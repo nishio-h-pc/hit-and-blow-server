@@ -3,7 +3,7 @@
 	header('Access-Control-Allow-Origin: https://r02092.github.io');
 	$url=parse_url(getenv('DATABASE_URL'));
 	$dbh=new PDO('pgsql:dbname='.substr($url['path'],1).';host='.$url['host'],$url['user'],$url['pass']);
-	$stmt=$dbh->query('select schemaname, tablename, tableowner from pg_tables;');
+	$stmt=$dbh->query('select * from information_schema.columns where table_catalog="'.substr($url['path'],1).'" and table_name="rooms" order by ordinal_position;');
 	var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
 	/*
 	switch($_POST['act']){
