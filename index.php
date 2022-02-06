@@ -5,7 +5,7 @@
 	$dbh=new PDO('pgsql:dbname='.substr($url['path'],1).';host='.$url['host'],$url['user'],$url['pass']);
 	switch($_POST['act']){
 		case 'start':
-			$stmt=$dbh->prepare('UPDATE rooms SET num1="?",name1="?" WHERE id=?');
+			$stmt=$dbh->prepare("UPDATE rooms SET num1='?',name1='?' WHERE id=?");
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$stmt->bindParam(1,$_POST['num'],PDO::PARAM_STR);
 			$stmt->bindParam(2,$_POST['name'],PDO::PARAM_STR);
@@ -42,7 +42,7 @@
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
 			}
-			$stmt=$dbh->prepare('INSERT INTO rooms (id,num0,name0,duplicate) VALUES (?,"?","?",?)');
+			$stmt=$dbh->prepare("INSERT INTO rooms (id,num0,name0,duplicate) VALUES (?,'?','?',?)");
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$stmt->bindParam(1,$id,PDO::PARAM_INT);
 			$stmt->bindParam(2,$_POST['num'],PDO::PARAM_STR);
@@ -67,7 +67,7 @@
 			echo $res['ans'];
 			break;
 		case 'judge':
-			$stmt=$dbh->prepare('UPDATE rooms SET ans="?" WHERE id=?');
+			$stmt=$dbh->prepare("UPDATE rooms SET ans='?' WHERE id=?");
 			$stmt->bindParam(1,$_POST['ans'],PDO::PARAM_INT);
 			$stmt->bindParam(2,hexdec($_POST['id']),PDO::PARAM_INT);
 			$stmt->execute();
