@@ -46,7 +46,7 @@
 			}
 			$stmt=$dbh->prepare("INSERT INTO rooms (id,num0,name0,duplicate) VALUES (:id,:num0,:name0,:duplicate)");
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
-			$stmt->bindParam(':id0',$id,PDO::PARAM_INT);
+			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->bindParam(':num0',$_POST['num'],PDO::PARAM_STR);
 			$stmt->bindParam(':name0',$_POST['name'],PDO::PARAM_STR);
 			$stmt->bindParam(':duplicate',$_POST['duplicate'],PDO::PARAM_INT);
