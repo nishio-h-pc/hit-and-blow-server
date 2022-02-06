@@ -2,6 +2,8 @@
 	header('Access-Control-Allow-Origin: https://r02092.github.io');
 	$url=parse_url(getenv('DATABASE_URL'));
 	$dbh=new PDO('pgsql:dbname='.substr($url['path'],1).';host='.$url['host'],$url['user'],$url['pass']);
+	echo $dbh->query('SHOW tables')->fetchAll(PDO::FETCH_ASSOC|PDO::FETCH_COLUMN)[0];
+	/*
 	switch($_POST['act']){
 		case 'start':
 			$stmt=$dbh->prepare('UPDATE rooms SET num1="?",name1="?" WHERE id=?');
@@ -103,4 +105,5 @@
 	function removeCharacter($position,$str){
 		return substr_replace($str,'',$position,1);
 	}
+	*/
 ?>
