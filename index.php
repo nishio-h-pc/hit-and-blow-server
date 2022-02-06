@@ -27,6 +27,7 @@
 				$stmt->execute();
 				$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0]['name1'];
 			}while(!is_null($res));
+			var_dump($res);
 			echo $res;
 			break;
 		case 'genRoom':
@@ -44,7 +45,7 @@
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
 			}
-			$stmt=$dbh->prepare("INSERT INTO rooms (id,num0,name0,duplicate) VALUES (:id,:num0,:name0,:duplicate)");
+			$stmt=$dbh->prepare('INSERT INTO rooms (id,num0,name0,duplicate) VALUES (:id,:num0,:name0,:duplicate)');
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->bindParam(':num0',$_POST['num'],PDO::PARAM_STR);
