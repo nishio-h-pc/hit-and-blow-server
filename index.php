@@ -2,8 +2,7 @@
 	header('Access-Control-Allow-Origin: https://r02092.github.io');
 	$url=parse_url(getenv('DATABASE_URL'));
 	$dbh=new PDO('pgsql:dbname='.substr($url['path'],1).';host='.$url['host'],$url['user'],$url['pass']);
-	$stmt=$dbh->query('SHOW tables');
-	var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+	var_dump($dbh->query('SHOW tables'));
 	/*
 	switch($_POST['act']){
 		case 'start':
