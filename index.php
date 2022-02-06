@@ -27,7 +27,6 @@
 				$stmt->execute();
 				$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0]['name1'];
 			}while(is_null($res));
-			var_dump($res);
 			echo $res;
 			break;
 		case 'genRoom':
@@ -72,14 +71,14 @@
 			break;
 		case 'judge':
 			$id=hexdec($_POST['id']);
-			$stmt=$dbh->prepare("UPDATE rooms SET ans='?' WHERE id=?");
-			$stmt->bindParam(1,$_POST['ans'],PDO::PARAM_INT);
-			$stmt->bindParam(2,$id,PDO::PARAM_INT);
+			$stmt=$dbh->prepare('UPDATE rooms SET ans=:ans WHERE id=:id');
+			$stmt->bindParam(':ans',$_POST['ans'],PDO::PARAM_INT);
+			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->execute();
 			$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
-			$stmt=$dbh->prepare('SELECT num? FROM rooms WHERE id=?');
-			$stmt->bindParam(1,$_POST['playerId'],PDO::PARAM_INT);
-			$stmt->bindParam(2,$id,PDO::PARAM_INT);
+			$stmt=$dbh->prepare('SELECT num:player FROM rooms WHERE id=:id');
+			$stmt->bindParam(':player',$_POST['playerId'],PDO::PARAM_INT);
+			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->execute();
 			$hit=0;
 			$blow=0;
