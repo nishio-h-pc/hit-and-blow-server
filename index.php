@@ -36,7 +36,7 @@
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$stmt->bindParam(1,$id,PDO::PARAM_INT);
 			$stmt->execute();
-			if($stmt->fetchAll(PDO::FETCH_ASSOC||PDO::FETCH_COLUMN)[0]){
+			if($stmt->fetchAll()[0][0]){
 				$stmt=$dbh->prepare('DELETE FROM rooms WHERE id=?');
 				$stmt->setFetchMode(PDO::FETCH_ASSOC);
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
