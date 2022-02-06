@@ -6,11 +6,11 @@
 	switch($_POST['act']){
 		case 'start':
 			$id=hexdec($_POST['id']);
-			$stmt=$dbh->prepare("UPDATE rooms SET num1='?',name1='?' WHERE id=?");
+			$stmt=$dbh->prepare("UPDATE rooms SET num1=':num1',name1=':name1' WHERE id=:id");
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
-			$stmt->bindParam(1,$_POST['num'],PDO::PARAM_STR);
-			$stmt->bindParam(2,$_POST['name'],PDO::PARAM_STR);
-			$stmt->bindParam(3,$id,PDO::PARAM_INT);
+			$stmt->bindParam(':num1',$_POST['num'],PDO::PARAM_STR);
+			$stmt->bindParam(':name1',$_POST['name'],PDO::PARAM_STR);
+			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->execute();
 			$stmt=$dbh->prepare('SELECT name0,duplicate FROM rooms WHERE id=?');
 			$stmt->bindParam(1,$id,PDO::PARAM_INT);
