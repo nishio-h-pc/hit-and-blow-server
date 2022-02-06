@@ -42,7 +42,7 @@
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
 			}
-			$stmt=$dbh->prepare("INSERT INTO rooms (id,num0,name0,duplicate) VALUES (?,'?','?',?)");
+			$stmt=$dbh->prepare("INSERT INTO rooms (id,num0,name0,duplicate) VALUES (?,?,?,?)");
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$stmt->bindParam(1,$id,PDO::PARAM_INT);
 			$stmt->bindParam(2,$_POST['num'],PDO::PARAM_STR);
