@@ -91,13 +91,13 @@
 					$blow++;
 				}
 			}
-			echo $hit.' '.$blow;
 			if($hit==strlen($ans)){
 				$stmt=$dbh->prepare('DELETE FROM rooms WHERE id=?');
 				$stmt->setFetchMode(PDO::FETCH_ASSOC);
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
 			}
+			echo $hit.' '.$blow;
 	}
 	function removeCharacter($position,$str){
 		return substr_replace($str,'',$position,1);
