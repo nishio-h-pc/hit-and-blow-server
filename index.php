@@ -75,11 +75,11 @@
 			$stmt->bindParam(':ans',$_POST['ans'],PDO::PARAM_INT);
 			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->execute();
-			$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 			$stmt=$dbh->prepare('SELECT num:player FROM rooms WHERE id=:id');
 			$stmt->bindParam(':player',$_POST['playerId'],PDO::PARAM_INT);
 			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->execute();
+			$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 			$hit=0;
 			$blow=0;
 			$num = $stmt->fetchAll(PDO::FETCH_ASSOC|PDO::FETCH_COLUMN)[0];
