@@ -31,7 +31,7 @@
 			echo $res;
 			break;
 		case 'genRoom':
-			$res=$dbh->query("SELECT id FROM rooms WHERE time>=now() - interval '1 week'")->fetchAll(PDO::FETCH_ASSOC);
+			$res=$dbh->query("SELECT id FROM rooms WHERE time>=NOW() - interval '1 week'")->fetchAll(PDO::FETCH_ASSOC);
 			do{
 				$id=mt_rand(0,255);
 			}while(in_array($id,array_column($res,0)));
@@ -45,7 +45,7 @@
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
 			}
-			$stmt=$dbh->prepare('INSERT INTO rooms (id,num0,name0,duplicate) VALUES (:id,:num0,:name0,:duplicate)');
+			$stmt=$dbh->prepare('INSERT INTO rooms (id,time,num0,name0,duplicate) VALUES (:id,NOW(),:num0,:name0,:duplicate)');
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->bindParam(':num0',$_POST['num'],PDO::PARAM_STR);
