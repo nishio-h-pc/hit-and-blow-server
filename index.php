@@ -28,7 +28,7 @@
 			echo $res;
 			break;
 		case 'genRoom':
-			$res=$dbh->query('SELECT id FROM rooms WHERE time>=now() - interval "1 week"')->fetchAll(PDO::FETCH_ASSOC);
+			$res=$dbh->query("SELECT id FROM rooms WHERE time>=now() - interval '1 week'")->fetchAll(PDO::FETCH_ASSOC);
 			do{
 				$id=mt_rand(0,255);
 			}while(!in_array($id,array_column($res,0)));
