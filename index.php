@@ -6,7 +6,7 @@
 	switch($_POST['act']){
 		case 'start':
 			$id=hexdec($_POST['id']);
-			$stmt=$dbh->prepare("UPDATE rooms SET num1=':num1',name1=':name1' WHERE id=:id");
+			$stmt=$dbh->prepare('UPDATE rooms SET num1=:num1,name1=:name1 WHERE id=:id');
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$stmt->bindParam(':num1',$_POST['num'],PDO::PARAM_STR);
 			$stmt->bindParam(':name1',$_POST['name'],PDO::PARAM_STR);
