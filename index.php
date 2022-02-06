@@ -1,6 +1,7 @@
 <?php
 	header('Access-Control-Allow-Origin: https://r02092.github.io');
-	$dbh=new PDO('mysql:dbname=heroku_;host=.cleardb.net',$user,$pw);
+	$url=parse_url(getenv('DATABASE_URL'));
+	$dbh=new PDO('pgsql:dbname='.substr($url['path'],1).';host='.$url['host'],$url['user'],$url['pass']);
 	switch($_POST['act']){
 		case 'start':
 			$stmt=$dbh->prepare('UPDATE rooms SET num1="?",name1="?" WHERE id=?');
