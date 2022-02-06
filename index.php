@@ -26,7 +26,7 @@
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
 				$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0]['name1'];
-			}while(!is_null($res));
+			}while(is_null($res));
 			var_dump($res);
 			echo $res;
 			break;
