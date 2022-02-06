@@ -1,9 +1,9 @@
 <?php
-	ini_set('display_errors',1);
 	header('Access-Control-Allow-Origin: https://r02092.github.io');
 	$url=parse_url(getenv('DATABASE_URL'));
 	$dbh=new PDO('pgsql:dbname='.substr($url['path'],1).';host='.$url['host'],$url['user'],$url['pass']);
-	var_dump($dbh->query('SHOW tables'));
+	$stmt=$dbh->query('select pg_statio_user_tables.relname from pg_catalog.pg_class,pg_catalog.pg_statio_user_tables where relkind="r" and pg_catalog.pg_statio_user_tables.relid=pg_catalog.pg_class.relfilenode');
+	var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
 	/*
 	switch($_POST['act']){
 		case 'start':
