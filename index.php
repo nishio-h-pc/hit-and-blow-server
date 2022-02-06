@@ -70,14 +70,14 @@
 			echo $res['ans'];
 			break;
 		case 'judge':
+			if(!preg_match('/^[01]$/',$_POST['playerId']))exit();
 			$id=hexdec($_POST['id']);
 			$stmt=$dbh->prepare('UPDATE rooms SET ans=:ans WHERE id=:id');
 			$stmt->bindParam(':ans',$_POST['ans'],PDO::PARAM_INT);
 			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->execute();
-			$stmt=$dbh->prepare('SELECT num:player FROM rooms WHERE id=:id');
-			$stmt->bindParam(':player',$_POST['playerId'],PDO::PARAM_INT);
-			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
+			$stmt=$dbh->prepare('SELECT num'.$_POST['playerId'].' FROM rooms WHERE id=?');
+			$stmt->bindParam(1,$id,PDO::PARAM_INT);
 			$stmt->execute();
 			$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 			$hit=0;
