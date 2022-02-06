@@ -104,5 +104,4 @@
 	function removeCharacter($position,$str){
 		return substr_replace($str,'',$position,1);
 	}
-	*/
 ?>
