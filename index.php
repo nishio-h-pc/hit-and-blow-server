@@ -51,7 +51,7 @@
 			$stmt->bindParam(':name0',$_POST['name'],PDO::PARAM_STR);
 			$stmt->bindParam(':duplicate',$_POST['duplicate'],PDO::PARAM_INT);
 			$stmt->execute();
-			echo dechex($id);
+			echo str_pad(dechex($id),2,0);
 			break;
 		case 'wait':
 			$id=hexdec($_POST['id']);
@@ -70,7 +70,7 @@
 			echo $res['ans'];
 			break;
 		case 'judge':
-			if(!preg_match('/^[01]$/',$_POST['playerId']))exit();
+			if(!preg_match('/^[01]$/',$_POST['player']))exit();
 			$id=hexdec($_POST['id']);
 			$stmt=$dbh->prepare('UPDATE rooms SET ans=:ans WHERE id=:id');
 			$stmt->bindParam(':ans',$_POST['ans'],PDO::PARAM_INT);
