@@ -3,7 +3,7 @@
 	$url=parse_url(getenv('DATABASE_URL'));
 	$dbh=new PDO('pgsql:dbname='.substr($url['path'],1).';host='.$url['host'],$url['user'],$url['pass']);
 	$stmt=$dbh->query('SHOW tables');
-	echo $stmt->fetchAll(PDO::FETCH_ASSOC|PDO::FETCH_COLUMN)[0];
+	var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
 	/*
 	switch($_POST['act']){
 		case 'start':
