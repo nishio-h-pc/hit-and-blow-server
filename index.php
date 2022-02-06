@@ -37,6 +37,7 @@
 			$stmt->bindParam(1,$id,PDO::PARAM_INT);
 			$stmt->execute();
 			var_dump($stmt->fetchAll());
+			/*
 			if($stmt->fetchAll()[0][0]){
 				$stmt=$dbh->prepare('DELETE FROM rooms WHERE id=?');
 				$stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -51,6 +52,7 @@
 			$stmt->bindParam(4,$_POST['duplicate'],PDO::PARAM_INT);
 			$stmt->execute();
 			echo dechex($id);
+			*/
 			break;
 		case 'wait':
 			$stmt=$dbh->prepare('SELECT time FROM rooms WHERE id=?');
