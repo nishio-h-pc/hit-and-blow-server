@@ -31,7 +31,7 @@
 			$res=$dbh->query("SELECT id FROM rooms WHERE time>=now() - interval '1 week'")->fetchAll(PDO::FETCH_ASSOC);
 			do{
 				$id=mt_rand(0,255);
-			}while(!in_array($id,array_column($res,0)));
+			}while(in_array($id,array_column($res,0)));
 			$stmt=$dbh->prepare('SELECT EXISTS(SELECT 0 FROM rooms WHERE id=?)');
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$stmt->bindParam(1,$id,PDO::PARAM_INT);
