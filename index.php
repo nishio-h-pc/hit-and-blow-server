@@ -42,12 +42,12 @@
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
 			}
-			$stmt=$dbh->prepare("INSERT INTO rooms (id,num0,name0,duplicate) VALUES (?,?,?,?)");
+			$stmt=$dbh->prepare("INSERT INTO rooms (id,num0,name0,duplicate) VALUES (:id,:num0,:name0,:duplicate)");
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
-			$stmt->bindParam(1,$id,PDO::PARAM_INT);
-			$stmt->bindParam(2,$_POST['num'],PDO::PARAM_STR);
-			$stmt->bindParam(3,$_POST['name'],PDO::PARAM_STR);
-			$stmt->bindParam(4,$_POST['duplicate'],PDO::PARAM_INT);
+			$stmt->bindParam(':id0',$id,PDO::PARAM_INT);
+			$stmt->bindParam(':num0',$_POST['num'],PDO::PARAM_STR);
+			$stmt->bindParam(':name0',$_POST['name'],PDO::PARAM_STR);
+			$stmt->bindParam(':duplicate',$_POST['duplicate'],PDO::PARAM_INT);
 			$stmt->execute();
 			echo dechex($id);
 			break;
