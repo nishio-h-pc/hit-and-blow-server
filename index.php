@@ -54,14 +54,9 @@
 			echo str_pad(dechex($id),2,0,STR_PAD_LEFT);
 			break;
 		case 'wait':
-			$id=hexdec($_POST['id']);
-			$stmt=$dbh->prepare('SELECT time FROM rooms WHERE id=?');
-			$stmt->bindParam(1,$id,PDO::PARAM_INT);
-			$stmt->execute();
-			$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 			do{
 				sleep(1);
-				$oldTime=$res['time'];
+				if(isset($res))$oldTime=$res['time'];
 				$stmt=$dbh->prepare('SELECT ans,time FROM rooms WHERE id=?');
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
