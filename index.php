@@ -79,10 +79,11 @@
 			$blow=0;
 			$num = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]['num'.$_POST['player']];
 			$ans = $_POST['ans'];
+			$len=strlen($ans);
 			//$hitのときに数字を削除すると$iの番号とズレが生じる
 			//そのため数字を削除した数の分だけ$iから引く
 			$movedQuantity = 0;
-			for($i=0;$i<strlen($ans);$i++){
+			for($i=0;$i<$len;$i++){
 				if($num[$i-$movedQuantity]==$ans[$i-$movedQuantity]){
 					$hit++;
 					$num = removeCharacter($i-$movedQuantity,$num);
