@@ -72,7 +72,7 @@
 		case 'judge':
 			if(!preg_match('/^[01]$/',$_POST['player']))exit();
 			$id=hexdec($_POST['id']);
-			$stmt=$dbh->prepare('UPDATE rooms SET ans=:ans WHERE id=:id');
+			$stmt=$dbh->prepare('UPDATE rooms SET ans=:ans,time=NOW() WHERE id=:id');
 			$stmt->bindParam(':ans',$_POST['ans'],PDO::PARAM_INT);
 			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->execute();
