@@ -51,7 +51,7 @@
 			$stmt->bindParam(':name0',$_POST['name'],PDO::PARAM_STR);
 			$stmt->bindParam(':duplicate',$_POST['duplicate'],PDO::PARAM_INT);
 			$stmt->execute();
-			echo str_pad(dechex($id),2,0);
+			echo str_pad(dechex($id),2,0,STR_PAD_LEFT);
 			break;
 		case 'wait':
 			$id=hexdec($_POST['id']);
