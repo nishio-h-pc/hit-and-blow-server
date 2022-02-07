@@ -82,7 +82,7 @@
 			$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 			$hit=0;
 			$blow=0;
-			$num = $stmt->fetchAll(PDO::FETCH_ASSOC|PDO::FETCH_COLUMN)[0];
+			$num = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]['num'.$_POST['player']];
 			$ans = $_POST['ans'];
 			//$hitのときに数字を削除すると$iの番号とズレが生じる
 			//そのため数字を削除した数の分だけ$iから引く
