@@ -79,7 +79,6 @@
 			$stmt=$dbh->prepare('SELECT num'.$_POST['player'].' FROM rooms WHERE id=?');
 			$stmt->bindParam(1,$id,PDO::PARAM_INT);
 			$stmt->execute();
-			$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 			$hit=0;
 			$blow=0;
 			$num = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]['num'.$_POST['player']];
