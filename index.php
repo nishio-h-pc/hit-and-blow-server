@@ -61,8 +61,7 @@
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
 				$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
-				if(!isset($oldTime))$oldTime=$res['time'];
-			}while($oldTime==$res['time']);
+			}while(!isset($oldTime)||$oldTime==$res['time']);
 			echo $res['ans'];
 			break;
 		case 'judge':
