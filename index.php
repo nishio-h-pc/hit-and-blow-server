@@ -56,7 +56,7 @@
 		case 'wait':
 			do{
 				sleep(1);
-				if(isset($res))$oldTime=$res['time'];
+				if(isset($res))break;
 				$stmt=$dbh->prepare('SELECT ans,time FROM rooms WHERE id=?');
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
