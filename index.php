@@ -56,12 +56,13 @@
 		case 'wait':
 			do{
 				sleep(1);
-				if(isset($res))break;
+				if(isset($res))$oldTime=$res['time'];
 				$stmt=$dbh->prepare('SELECT ans,time FROM rooms WHERE id=?');
 				$stmt->bindParam(1,$id,PDO::PARAM_INT);
 				$stmt->execute();
 				$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
-			}while(!isset($oldTime)||$oldTime==$res['time']);
+				var_dump($res);
+			}while(false);
 			echo $res['ans'];
 			break;
 		case 'judge':
