@@ -6,17 +6,34 @@
 	switch($_POST['act']){
 		case 'start':
 			$id=hexdec($_POST['id']);
-			$stmt=$dbh->prepare('UPDATE rooms SET num1=:num1,name1=:name1 WHERE id=:id');
-			$stmt->setFetchMode(PDO::FETCH_ASSOC);
-			$stmt->bindParam(':num1',$_POST['num'],PDO::PARAM_STR);
-			$stmt->bindParam(':name1',$_POST['name'],PDO::PARAM_STR);
-			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
-			$stmt->execute();
-			$stmt=$dbh->prepare('SELECT name0,duplicate FROM rooms WHERE id=?');
+			$stmt=$dbh->prepare('SELECT name0,num0,duplicate FROM rooms WHERE id=?');
 			$stmt->bindParam(1,$id,PDO::PARAM_INT);
 			$stmt->execute();
 			$res=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
-			echo strlen($res['duplicate']).$res['name0'];
+			if(preg_match('/\d{'.strlen($res['num0']).'}/',$_POST['num'])){
+				if(!$res['duplicate']){
+					for($i=0;$i<10;$i++){
+						if(substr_count($_POST['num'],$i)>1){
+							$f=true;
+							break;
+						}
+					}
+				}
+			}else{
+				$f=true;
+			}
+			if($f){
+				echo ($res['duplicate']?1:0).strlen($res['num0']);
+				http_response_code(422);
+			}else{
+				echo strlen($res['duplicate']).$res['name0'];
+				$stmt=$dbh->prepare('UPDATE rooms SET num1=:num1,name1=:name1 WHERE id=:id');
+				$stmt->setFetchMode(PDO::FETCH_ASSOC);
+				$stmt->bindParam(':num1',$_POST['num'],PDO::PARAM_STR);
+				$stmt->bindParam(':name1',$_POST['name'],PDO::PARAM_STR);
+				$stmt->bindParam(':id',$id,PDO::PARAM_INT);
+				$stmt->execute();
+			}
 			break;
 		case 'waitStart':
 			$id=hexdec($_POST['id']);
